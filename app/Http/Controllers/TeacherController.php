@@ -6,18 +6,20 @@ use App\Models\Teacher;
 use App\Http\Requests\Teacher\StoreRequest;
 use App\Http\Requests\Teacher\UpdateRequest;
 use App\Models\Coefficient;
+use App\Models\Course;
+use App\Models\Classroom;
 
 class TeacherController extends Controller
 {
     public function index()
     {
-        $result = Teacher::latest()->paginate(5);
-        return view('teacher.index',compact('result'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $result = Teacher::all();
+        return view('pages.teacher.index',compact('result'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function create()
     {
-        return view('teacher.create');
+        return view('pages.teacher.create');
     }
 
     public function store(StoreRequest $request)
@@ -44,21 +46,27 @@ class TeacherController extends Controller
         return redirect()->route('teacher.index')->with('success','Teacher created successfully.');
     }
 
-    public function show(Teacher $result)
+    public function edit($id)
     {
-        return view('teacher.show',compact('result'));
+        $collection = Teacher::all();
+        $result = $collection->find($id)->toArray();
+        $course = Course::all()->pluck('name', 'id')->toArray();
+        $classroom = Classroom::all()->pluck('name', 'id')->toArray();
+        return view('pages.teacher.edit',compact('result', 'course', 'classroom'));
     }
 
-    public function edit(Teacher $result)
-    {
-        return view('teacher.edit',compact('result'));
-    }
-
-    public function update(UpdateRequest $request, Teacher $result)
+    public function update(UpdateRequest $request, $id)
     {   
-        $result->update($request->all());
-  
-        return redirect()->route('teacher.index')->with('success','Teacher updated successfully');
+    	$teacher = Teacher::find($id);
+
+        if(!$teacher){
+        	$this->flashMessage('warning', 'User not found!', 'danger');            
+            return redirect()->route('teacher.list');
+        }
+
+        $teacher->update($request->all());
+        $this->flashMessage('check', 'User updated successfully!', 'success');
+        return redirect()->route('teachers.list');
     }
 
     public function destroy( Teacher $teacher)

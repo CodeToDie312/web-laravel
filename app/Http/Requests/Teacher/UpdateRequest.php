@@ -24,22 +24,22 @@ class UpdateRequest extends FormRequest
                 'required',
                 'string',
                 'min:2',
-                'max:50',
-                'unique',
+                'max:50'
             ],
             'gender'=>[
+                'nullable',
                 'boolean',
             ],
             'birthdate'=>[
+                'nullable',
                 'date',
                 'before:today',
             ],
             'status'=>[
-                'interger',
+                'nullable',
                 'max:2'
             ],
             'salary' => [
-                'interger',
                 'nullable'
             ],
             'course_id'=>[

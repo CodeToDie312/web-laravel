@@ -14,96 +14,45 @@ use Yajra\DataTables\DataTables;
 
 class CourseController extends Controller
 {
- private Builder $model;
-
-    public function __construct()
-    {
-        $this->model = (new Course())->query();
-        $routeName   = Route::currentRouteName();
-        $arr         = explode('.', $routeName);
-        $arr         = array_map('ucfirst', $arr);
-        $title       = implode(' - ', $arr);
-
-        View::share('title', $title);
-    }
-
     public function index()
     {
-        return view('course.index',[
-        ]);
-    }
-
-    public function api()
-    {
-        return DataTables::of($this->model->withCount('students'))
-            ->editColumn('created_at', function ($object) {
-                return $object->created_at;
-            })
-            ->addColumn('edit', function ($object) {
-                return route('courses.edit', $object);
-            })
-            ->addColumn('destroy', function ($object) {
-                return route('courses.destroy', $object);
-            })
-            ->make(true);
-    }
-
-   public function apiName(Request $request)
-    {
-        return $this->model
-            ->where('name', 'like', '%' . $request->get('q') . '%')
-         ->get([
-                'id',
-                'name',
-            ]);
+        $result = Course::all();
+        //dd($result);
+        return view('pages.course.index',compact('result'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function create()
     {
-        return view('course.create');
+        return view('pages.course.create');
     }
 
     public function store(StoreRequest $request)
     {
-        // $object = new Course();
-        // $object->fill($request->validated());
-        // $object->save();
-        Course::create($request->validated());
-//        $this->model->create($request->validated());
-
-        return redirect()->route('courses.index');
+        Course::create($request->all());
+        return redirect()->route('pages.course.index')->with('success','Course created successfully.');
     }
 
-    public function edit(Course $course)
+    public function show(Course $result)
     {
-        return view('course.edit', [
-            'each' => $course,
-        ]);
+        return view('pages.course.show',compact('result'));
     }
 
-    public function update(UpdateRequest $request, $course)
+    public function edit(Course $result)
     {
-        // $this->model->where('id', $courseId)->update(
-        //     $request->validated()
-        // );
-        // $this->model->update(
-        //     $request->validated()
-        // );
-        $object = $this->model->find($course);
-        $object->fill($request->validated());
-        $object->save();
-
-        return redirect()->route('courses.index');
+        return view('pages.course.edit',compact('result'));
     }
 
-    public function destroy(DestroyRequest $request, $course)
+    public function update(UpdateRequest $request, Course $result)
+    {   
+        $result->update($request->all());
+  
+        return redirect()->route('pages.course.index')->with('success','Course updated successfully');
+    }
+
+    public function destroy( Course $course)
     {
-        Course::destroy( $course);
-//        $this->model->find($courseId)->delete();
-//        $this->model->where('id', $courseId)->delete();
-        $arr            = [];
-        $arr['status']  = true;
-        $arr['message'] = '';
-        return response($arr, 200);
+        $course->delete();
+  
+        return redirect()->route('pages.course.index')->with('success','Course deleted successfully');
     }
 }
