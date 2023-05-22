@@ -17,7 +17,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'web'
+    'middleware' => 'admin'
 ], function(){
 
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
