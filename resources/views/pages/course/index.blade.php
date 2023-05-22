@@ -11,16 +11,16 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">List Course</h3>
+                <a type="button" style=" width:150px; display:inline; float:right"class="btn btn-info" href="{{route('courses.create')}}">Add New</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Edit</th>
-                    <th>Delete</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -28,8 +28,9 @@
                   <tr>
                     <td>{{$value->id}}</td>
                     <td>{{$value->name}}</td>
-                    <td><button type="button"  class="btn btn-block btn-primary">Edit</button></td>
-                    <td><button type="button" class="btn btn-block btn-danger">Delete</button></td>
+                    <td>
+                    <a type="button"  class="btn btn-block btn-primary" href="{{route('courses.detail', [$value->id])}}">Edit</a>
+                    </td>
                   </tr>
                   @endforeach
                   </tbody>

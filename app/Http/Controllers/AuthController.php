@@ -29,7 +29,7 @@ class AuthController extends Controller
             session()->put('phone', $user->phone);
             session()->put('level', $user->level);
 
-            return redirect()->route('courses.index');
+            return redirect()->route('dashboard');
         } catch (Throwable $e) {
             return redirect()->route('login');
         }

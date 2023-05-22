@@ -8,6 +8,7 @@ use App\Http\Requests\Teacher\UpdateRequest;
 use App\Models\Coefficient;
 use App\Models\Course;
 use App\Models\Classroom;
+use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
@@ -19,10 +20,12 @@ class TeacherController extends Controller
 
     public function create()
     {
-        return view('pages.teacher.create');
+        $course = Course::all()->pluck('name', 'id')->toArray();
+        $classroom = Classroom::all()->pluck('name', 'id')->toArray();
+        return view('pages.teacher.create', compact('course','classroom'));
     }
 
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
         $data= [];
         $data['name'] = $request->get('name');
@@ -35,15 +38,14 @@ class TeacherController extends Controller
         $data['course_id'] = $request->get('course_id');
 
         //tính lương với lương đầu vào nhân với hệ số cố định
-        $coefficient = Coefficient::all()->pluck('coefficient'); //lấy hệ số lương từ database
-
+        $coefficient = Coefficient::all()->pluck('coefficient')->toArray(); //lấy hệ số lương từ database
         if(!empty($coefficient)){
-            $invoice = $request->get('salary') * $coefficient;
+            $invoice = (int)$request->get('salary') * $coefficient[0];
             $data['salary'] = $invoice;
         }
 
-        Teacher::create($data);
-        return redirect()->route('teacher.index')->with('success','Teacher created successfully.');
+        $result = Teacher::create($data);
+        return redirect()->route('teachers.list')->with('success','Teacher created successfully.');
     }
 
     public function edit($id)
@@ -55,7 +57,7 @@ class TeacherController extends Controller
         return view('pages.teacher.edit',compact('result', 'course', 'classroom'));
     }
 
-    public function update(UpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {   
     	$teacher = Teacher::find($id);
 
@@ -65,15 +67,14 @@ class TeacherController extends Controller
         }
 
         $teacher->update($request->all());
-        $this->flashMessage('check', 'User updated successfully!', 'success');
-        return redirect()->route('teachers.list');
+        return redirect()->route('teachers.list')->with('success');
     }
 
-    public function destroy( Teacher $teacher)
+    public function destroy( Request $request)
     {
-        $teacher->delete();
-  
-        return redirect()->route('teacher.index')->with('success','Teacher deleted successfully');
+        $result = Teacher::where('id', $request->get('id'))->first();
+        $final = $result->delete();
+        return redirect()->route('teachers.list')->with('success','Teacher deleted successfully');
     }
 
 }

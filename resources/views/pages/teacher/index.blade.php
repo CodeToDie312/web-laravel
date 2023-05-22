@@ -10,11 +10,12 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">List Course</h3>
+            <h3 class="card-title">List Teacher</h3>
+            <a type="button" style=" width:150px; display:inline; float:right"class="btn btn-info" href="{{route('teacher.create')}}">Add New</a>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="example2" class="table table-bordered table-hover">
               <thead>
               <tr>
                 <th>ID</th>
@@ -43,10 +44,21 @@
                 <td>{{$value->classroom_id}}</td>
                 <td>{{$value->course_id}}</td>
                 <td>
-                  <a type="button"  class="btn btn-block btn-primary" href="{{route('teacher.detail', [$value->id])}}">Edit</button>
+                  <a type="button"  class="btn btn-block btn-primary" href="{{route('teacher.detail', [$value->id])}}">Edit</a>
                 </td>
                 <td>
-                  <a type="button" class="btn btn-block btn-danger" href="{{route('teacher.destroy', [$value->id])}}">Delete</button>
+                  <a type="button" method="delete" class="btn btn-block btn-danger" href="teacher/delete/[$value->id])"onclick="
+                    var result = confirm('Are you sure you want to delete this record?');
+                    if(result){
+                        event.preventDefault();
+                        document.getElementById('delete-form').submit();
+                    }"
+                  >Delete</a>
+                  <form method="POST" id="delete-form" action="{{route('teacher.destroy', [$value->id])}}">
+                      {{csrf_field()}}
+                      <input type="hidden" name="id" value="{{$value->id}}">
+                      <input type="hidden" name="_method" value="DELETE">
+                  </form>
                 </td>
               </tr>
               @endforeach
@@ -63,3 +75,4 @@
   </div>
 </section>
 @endsection
+

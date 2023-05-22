@@ -5,7 +5,8 @@
 <div class="grid">
 
     <form action="{{ route('process_login') }}" method="POST" class="form login">
-@csrf
+        @csrf
+        {{ csrf_field() }}
         <div class="form__field">
             <label for="login__username"><svg class="icon">
                     <use xlink:href="#icon-user"></use>

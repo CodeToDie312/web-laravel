@@ -1,22 +1,18 @@
 @extends('layout.master', [
     'class' => '',
-    'elementActive' => 'teachers'
+    'elementActive' => 'students'
 ])
 @section('content')
-<form action="{{route('teacher.store')}}" method="post">
+<form action="{{route('students.store')}}" method="post">
     @method('POST')
     {{ csrf_field() }}
     <div class="card-header">
-        <h3 class="card-title">Add Teacher</h3>
+        <h3 class="card-title">Add Student</h3>
     </div>
     <div class="card-body">
         <div class="form-group">
             <label for="exampleInput1">Name</label>
             <input type="text" class="form-control" name="name" value="">
-        </div>
-        <div class="form-group">
-            <label for="exampleInput1">Salary</label>
-            <input type="number" class="form-control" name="salary" value="">
         </div>
         <div class="form-group">
             <label for="exampleInput1">Gender</label>
@@ -38,14 +34,6 @@
             <label for="exampleSelectRounded0">Course</label>
             <select class="custom-select rounded-0" name= "course_id"id="exampleSelectRounded0">
                 @foreach($course as $key => $value)
-                <option value="{{$key}}">{{$value}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleSelectRounded0">Classroom</label>
-            <select class="custom-select rounded-0" name= "classroom_id"id="exampleSelectRounded0">
-                @foreach($classroom as $key => $value)
                 <option value="{{$key}}">{{$value}}</option>
                 @endforeach
             </select>

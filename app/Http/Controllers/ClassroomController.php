@@ -3,48 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Classroom;
 use App\Models\Course;
 
-class CourseController extends Controller
+class ClassroomController extends Controller
 {
    
     public function index()
     {
-        $result = Course::all();
-        return view('pages.course.index',compact('result'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $result = Classroom::all();
+        return view('pages.classroom.index',compact('result'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function create()
     {
-        return view('pages.course.create');
+        $course = Course::all()->pluck('name', 'id')->toArray();
+        return view('pages.classroom.create', compact('course'));
     }
 
     public function store(Request $request)
     {
-        $result = Course::create($request->all());
+        $result = Classroom::create($request->all());
         if($result == true){
-            return redirect()->route('courses.list')->with('success','Course created successfully.');
+            return redirect()->route('classrooms.list')->with('success','Teacher created successfully.');
         }
     }
 
     public function edit($id)
     {
-        $collection = Course::all();
+        $collection = Classroom::all();
         $result = $collection->find($id)->toArray();
-        return view('pages.course.edit',compact('result'));
+        $course = Course::all()->pluck('name', 'id')->toArray();
+        return view('pages.classroom.edit',compact('result', 'course'));
     }
 
     public function update(Request $request, $id)
     {   
-    	$teacher = Course::find($id);
+    	$teacher = Classroom::find($id);
 
         if(!$teacher){
         	$this->flashMessage('warning', 'User not found!', 'danger');            
-            return redirect()->route('courses.list');
+            return redirect()->route('classrooms.list');
         }
 
         $teacher->update($request->all());
-        return redirect()->route('courses.list')->with('success');
+        return redirect()->route('classrooms.list')->with('success');
     }
 
     //soft delete 

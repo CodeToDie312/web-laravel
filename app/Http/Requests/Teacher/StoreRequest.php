@@ -24,31 +24,26 @@ class StoreRequest extends FormRequest
                 'required',
                 'string',
                 'min:2',
-                'max:50',
-                'unique',
+                'max:50'
             ],
             'gender'=>[
-                'boolean',
+                'string'
             ],
             'birthdate'=>[
                 'date',
                 'before:today',
             ],
             'status'=>[
-                'interger',
                 'max:2'
             ],
             'salary' => [
-                'interger',
-                'nullable'
+                'number'
             ],
             'course_id'=>[
-                'required',
-                Rule::exists(Course::class, 'id'),
+                'required'
             ],
             'classroom_id'=>[
-                'required',
-                Rule::exists(Classroom::class, 'id')
+                'required'
             ]
         ];
     }

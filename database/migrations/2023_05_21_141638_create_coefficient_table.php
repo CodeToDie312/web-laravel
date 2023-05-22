@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coefficient', function (Blueprint $table) {
+        Schema::create('coefficients', function (Blueprint $table) {
             $table->id();
             $table->integer('coefficient');
             $table->timestamps();

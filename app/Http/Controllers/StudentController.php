@@ -3,56 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use App\Http\Requests\Student\StoreRequest;
-use App\Http\Requests\Student\UpdateRequest;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\View;
-use Yajra\DataTables\DataTables;
+use App\Models\Course;
 
 class StudentController extends Controller
 {
 
     public function index()
     {
-        $result = Student::latest()->paginate(5);
+        $result = Student::all();
         return view('pages.student.index',compact('result'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function create()
     {
-        return view('pages.student.create');
+        $course = Course::all()->pluck('name', 'id')->toArray();
+        return view('pages.student.create', compact('course'));
     }
 
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
-        Student::create($request->all());
-        return redirect()->route('pages.student.index')->with('success','Student created successfully.');
+        $result = Student::create($request->all());
+        if($result == false){
+            dd('1');
+        }
+        return redirect()->route('students.list')->with('success','student created successfully.');
     }
 
-    public function show(Student $result)
+    public function edit($id)
     {
-        return view('pages.student.show',compact('result'));
+        $collection = Student::all();
+        $result = $collection->find($id)->toArray();
+        $course = Course::all()->pluck('name', 'id')->toArray();
+        return view('pages.student.edit',compact('result', 'course'));
     }
 
-    public function edit(Student $result)
-    {
-        return view('pages.student.edit',compact('result'));
-    }
-
-    public function update(UpdateRequest $request, Student $result)
+    public function update(Request $request, $id)
     {   
-        $result->update($request->all());
-  
-        return redirect()->route('pages.student.index')->with('success','Student updated successfully');
+    	$student = Student::find($id);
+
+        if(!$student){
+        	$this->flashMessage('warning', 'User not found!', 'danger');            
+            return redirect()->route('student.list');
+        }
+
+        $student->update($request->all());
+        return redirect()->route('students.list')->with('success');
     }
 
-    public function destroy( Student $student)
+    public function destroy( Request $request)
     {
-        $student->delete();
-  
-        return redirect()->route('pages.student.index')->with('success','Student deleted successfully');
+        $result = Student::where('id', $request->get('id'))->first();
+        $final = $result->delete();
+        return redirect()->route('students.list')->with('success','student deleted successfully');
     }
 }

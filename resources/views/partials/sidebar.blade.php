@@ -68,7 +68,7 @@
             </a>
           </li> 
           <li class="nav-item">
-            <a href="/classroom" class="nav-link  {{ $elementActive == 'classroom' ? 'active' : '' }}">
+            <a href="{{route('classrooms.list')}}" class="nav-link  {{ $elementActive == 'classrooms' ? 'active' : '' }}">
             <i class="nav-icon fas fa-id-card-alt"></i>
               <p>
                 Classroom
