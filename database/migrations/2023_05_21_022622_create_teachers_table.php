@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('gender')->nullable();
-            $table->string('birthdate');
+            $table->date('birthdate');
             $table->string('address',225);
             $table->tinyInteger('status');
             $table->integer('salary');

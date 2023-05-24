@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             ClassroomSeeder::class,
             TeacherSeeder::class,
-            StudentSeeder::class
+            StudentSeeder::class,
+            CoefficientSeeder::class
         ]);
     }
 }

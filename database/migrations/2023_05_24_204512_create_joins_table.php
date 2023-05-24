@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',255);
             $table->string('gender')->nullable();
-            $table->string('birthdate');
+            $table->date('birthdate');
             $table->string('email');
             $table->string('address',225);
             $table->integer('course_id');

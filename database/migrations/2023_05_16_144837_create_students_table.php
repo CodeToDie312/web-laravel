@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',255);
             $table->string('gender')->nullable();
-            $table->string('birthdate');
+            $table->date('birthdate');
             $table->string('address',225);
             $table->tinyInteger('status')->nullable();
             $table->unsignedBigInteger('course_id');
