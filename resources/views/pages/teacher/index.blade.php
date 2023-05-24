@@ -37,7 +37,7 @@
                 <td>{{$value->id}}</td>
                 <td>{{$value->name}}</td>
                 <td>{{$value->gender}}</td>
-                <td>{{$value->birthday}}</td>
+                <td>{{$value->birthdate}}</td>
                 <td>{{$value->address}}</td>
                 <td>{{$value->status}}</td>
                 <td>{{$value->salary}}</td>

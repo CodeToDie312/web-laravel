@@ -22,7 +22,7 @@ class TeacherFactory extends Factory
         $course_id = Course::all()->pluck('id');
         return [
             'name' => $this->faker->name(),
-            'gender' => '0',
+            'gender' => 'male',
             'birthdate' => now(),
             'address' => $this->faker->address(),
             'status' => '1',

@@ -5,6 +5,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Guest\LandingpageController;
+use App\Http\Controllers\NewStudentController;
 use App\Http\Middleware\CheckLoginMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -14,13 +16,19 @@ Route::group([
 ], function(){
     Route::get('login', [\App\Http\Controllers\AuthController::class,'login'])->name('login');
     Route::post('login', [\App\Http\Controllers\AuthController::class, 'processLogin'])->name('process_login');
+
+    //frontend route 
+    Route::get('/', [LandingpageController::class, 'index'])->name('index');
+    Route::get('form', [LandingpageController::class, 'form'])->name('form');
+    Route::get('search', [LandingpageController::class, 'search'])->name('search');
+    Route::post('join_student/store', [LandingpageController::class, 'store'])->name('join.store');
 });
 
 Route::group([
     'middleware' => 'admin'
 ], function(){
 
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/admin', [HomeController::class, 'index'])->name('dashboard');
 
     //route teacher
     Route::get('teachers/index', [TeacherController::class, 'index'])->name('teachers.list');
@@ -55,6 +63,11 @@ Route::group([
     Route::post('classrooms/store', [ClassroomController::class, 'store'])->name('classrooms.store');
     Route::put('classrooms/update/{id}', [ClassroomController::class,'update'])->name(('classrooms.update'));
     Route::delete('classrooms/delete/{id}', [ClassroomController::class, 'destroy'])->name('classrooms.destroy');
+
+    //new student
+    Route::get('new_student/index', [NewStudentController::class, 'index'])->name('new_student.list');
+    Route::get('new_student/fetch/{id}', [NewStudentController::class, 'fetch'])->name('new_student.detail');
+    Route::post('new_student/trigger', [NewStudentController::class, 'trigger'])->name('new_student.trigger');
 });
 Route::get('test', function() {
     return view('layout.user');

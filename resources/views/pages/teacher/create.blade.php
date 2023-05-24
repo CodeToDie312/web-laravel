@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInput1">Gender</label>
-            <input type="number" class="form-control" name="gender" value="">
+            <input type="text" class="form-control" name="gender" value="">
         </div>
         <div class="form-group">
             <label for="exampleInput1">Address</label>

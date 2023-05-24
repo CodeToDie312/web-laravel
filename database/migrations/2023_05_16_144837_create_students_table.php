@@ -11,10 +11,10 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);
-            $table->boolean('gender')->default(0);
-            $table->date('birthdate');
+            $table->string('gender')->nullable();
+            $table->string('birthdate');
             $table->string('address',225);
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->nullable();
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses');
             $table->timestamps();

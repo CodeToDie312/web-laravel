@@ -18,10 +18,6 @@
             <input type="text" class="form-control" name="name" value="{{$result['name']}}">
         </div>
         <div class="form-group">
-            <label for="exampleInput1">Gender</label>
-            <input type="number" class="form-control" name="gender" value="{{$result['gender']}}">
-        </div>
-        <div class="form-group">
             <label for="exampleInput1">Address</label>
             <input type="text" class="form-control" name="address" value="{{$result['address']}}">
         </div>

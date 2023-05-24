@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('gender')->default(0);
-            $table->date('birthdate');
+            $table->string('name')->unique();
+            $table->string('gender')->nullable();
+            $table->string('birthdate');
             $table->string('address',225);
             $table->tinyInteger('status');
             $table->integer('salary');

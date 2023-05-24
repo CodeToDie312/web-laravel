@@ -74,6 +74,14 @@
                 Classroom
               </p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('new_student.list')}}" class="nav-link  {{ $elementActive == 'new_student' ? 'active' : '' }}">
+            <i class="nav-icon fas fa-id-card-alt"></i>
+              <p>
+                New Student
+              </p>
+            </a>
           </li>  
         </ul>
       </nav>
