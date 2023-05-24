@@ -20,7 +20,10 @@
         </div>
         <div class="form-group">
             <label for="exampleInput1">Gender</label>
-            <input type="text" class="form-control" name="gender" value="">
+            <select class="custom-select rounded-0" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="exampleInput1">Address</label>
