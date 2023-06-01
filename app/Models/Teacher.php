@@ -16,7 +16,7 @@ class Teacher extends Model
       'birthdate',
       'address',
       'status',
-      'salary',
+      'case',
 	  'classroom_id',
 	  'course_id'
     ];

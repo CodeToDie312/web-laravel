@@ -27,24 +27,27 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
-        $data= [];
-        $data['name'] = $request->get('name');
-        $data['gender'] = $request->get('gender');
-        $data['birthdate'] = $request->get('birthdate');
-        $data['address'] = $request->get('address');
-        $data['status'] = $request->get('status');
-        $data['name'] = $request->get('name');
-        $data['classroom_id'] = $request->get('classroom_id');
-        $data['course_id'] = $request->get('course_id');
+        // $data= [];
+        // $data['name'] = $request->get('name');
+        // $data['gender'] = $request->get('gender');
+        // $data['birthdate'] = $request->get('birthdate');
+        // $data['address'] = $request->get('address');
+        // $data['status'] = $request->get('status');
+        // $data['name'] = $request->get('name');
+        // $data['classroom_id'] = $request->get('classroom_id');
+        // $data['course_id'] = $request->get('course_id');
 
-        //tính lương với lương đầu vào nhân với hệ số cố định
-        $coefficient = Coefficient::all()->pluck('coefficient')->toArray(); //lấy hệ số lương từ database
-        if(!empty($coefficient)){
-            $invoice = (int)$request->get('salary') * $coefficient[0];
-            $data['salary'] = $invoice;
+        // //tính lương với lương đầu vào nhân với hệ số cố định
+        // $coefficient = Coefficient::all()->pluck('coefficient')->toArray(); //lấy hệ số lương từ database
+        // if(!empty($coefficient)){
+        //     $invoice = (int)$request->get('salary') * $coefficient[0];
+        //     $data['salary'] = $invoice;
+        // }
+
+        $result = Teacher::create($request->all());
+        if($result === false){
+            echo('fail');
         }
-
-        $result = Teacher::create($data);
         return redirect()->route('teachers.list')->with('success','Teacher created successfully.');
     }
 

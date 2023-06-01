@@ -23,10 +23,11 @@ class TeacherFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'gender' => 'male',
+            'email' => $this->faker->email(),
             'birthdate' => now(),
             'address' => $this->faker->address(),
             'status' => '1',
-            'salary' => $this->faker->numberBetween(0, 10000000),
+            'case' => $this->faker->numberBetween(0, 10),
             'classroom_id' => $this->faker->randomElement($classroom_id),
             'course_id'=> $this->faker->randomElement($course_id)
         ];

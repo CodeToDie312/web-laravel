@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('gender')->nullable();
+            $table->string('email');
             $table->date('birthdate');
             $table->string('address',225);
             $table->tinyInteger('status');
-            $table->integer('salary');
+            $table->integer('case');
             $table->foreignId('classroom_id')->constrained();
             $table->foreignId('course_id')->constrained();;
             $table->timestamps();

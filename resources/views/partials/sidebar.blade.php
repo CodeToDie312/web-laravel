@@ -33,6 +33,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('users.list')}}" class="nav-link  {{ $elementActive == 'users' ? 'active' : '' }}">
+            <i class="nav-icon fas fa-id-card-alt"></i>
+              <p>
+                Users
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('students.list')}}" class="nav-link  {{ $elementActive == 'students' ? 'active' : '' }}">
             <i class="nav-icon fas fa-id-card-alt"></i>
               <p>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -24,11 +25,28 @@ Route::group([
     Route::post('join_student/store', [LandingpageController::class, 'store'])->name('join.store');
 });
 
+// Route Teacher 
+Route::group([
+    'middleware' => 'teacher'
+], function(){
+    // Route::get('/calendar', [CalendarController::class, 'index'])->name('show.calendar');
+    // Route::post('/add_calendar', [CalendarController::class, 'add'])->name('add.calendar');
+    // Route::get('/salary', [TeacherSalaryController::class, 'index'])->name('salary.teacher.show');
+});
+
+// Route Admin Permission
 Route::group([
     'middleware' => 'admin'
 ], function(){
 
     Route::get('/admin', [HomeController::class, 'index'])->name('dashboard');
+
+    //route user 
+    Route::get('/users',[UserController::class, 'index'])->name('users.list');
+    Route::get('users/show/{id}', [UserController::class, 'edit'])->name('users.detail');
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+    Route::put('users/update/{id}', [UserController::class,'update'])->name(('users.update'));
 
     //route teacher
     Route::get('teachers/index', [TeacherController::class, 'index'])->name('teachers.list');
