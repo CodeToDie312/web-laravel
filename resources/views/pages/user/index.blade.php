@@ -33,7 +33,18 @@
                 <td>{{$value->email}}</td>
                 <td>{{$value->level}}</td>
                 <td>
-                  <a type="button"  class="btn btn-block btn-primary" href="{{route('users.detail', [$value->id])}}">Edit</a>
+                  <a type="button" method="delete" class="btn btn-block btn-danger" href="users/delete/[$value->id])"onclick="
+                    var result = confirm('Are you sure you want to delete this record?');
+                    if(result){
+                        event.preventDefault();
+                        document.getElementById('delete-form').submit();
+                    }"
+                  >Delete</a>
+                  <form method="POST" id="delete-form" action="{{route('users.destroy', [$value->id])}}">
+                      {{csrf_field()}}
+                      <input type="hidden" name="id" value="{{$value->id}}">
+                      <input type="hidden" name="_method" value="DELETE">
+                  </form>
                 </td>
               </tr>
               @endforeach

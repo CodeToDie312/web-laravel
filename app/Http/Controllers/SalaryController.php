@@ -20,8 +20,9 @@ class SalaryController extends Controller
                 //Tinh luong 
                 $coefficient = Coefficient::all()->pluck('coefficient')->toArray(); //lấy hệ số lương từ database
                 if(!empty($coefficient)){
-                    $invoice = (($caseOfTeacher* 1500000) * $coefficient[0]); // fix cung 150k 1 buổi;
+                    $invoice = (($caseOfTeacher * 1500000) * $coefficient[0]); // fix cung 150k 1 buổi;
                 }
+                
                 $data = $result->getAttributes();
                 $data['salary'] = $invoice;
                 return view('pages.salary.index', compact('data'));

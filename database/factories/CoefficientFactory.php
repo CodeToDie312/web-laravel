@@ -18,7 +18,7 @@ class CoefficientFactory extends Factory
     public function definition(): array
     {
         return [
-            'coefficient' => $this->faker->numberBetween(0,1)
+            'coefficient' => $this->faker->numberBetween(1,2)
         ];
     }
 }

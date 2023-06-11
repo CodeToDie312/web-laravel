@@ -16,4 +16,20 @@ class UserController extends Controller
     {
         return view('pages.user.create');
     }
+
+    public function store(Request $request)
+    {
+        $result = User::create($request->all());
+        if($result === false){
+            echo('fail');
+        }
+        return redirect()->route('users.list')->with('success','Teacher created successfully.');
+    }
+
+    public function destroy( Request $request)
+    {
+        $result = User::where('id', $request->get('id'))->first();
+        $final = $result->delete();
+        return redirect()->route('users.list')->with('success','Teacher deleted successfully');
+    }
 }
