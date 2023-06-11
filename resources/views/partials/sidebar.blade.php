@@ -32,6 +32,7 @@
               </p>
             </a>
           </li>
+          @if(session('level') == 0)
           <li class="nav-item">
             <a href="{{route('users.list')}}" class="nav-link  {{ $elementActive == 'users' ? 'active' : '' }}">
             <i class="nav-icon fas fa-id-card-alt"></i>
@@ -79,7 +80,7 @@
                 New Student
               </p>
             </a>
-          </li>  
+          </li> 
           <li class="nav-item">
             <a href="{{route('salary.teacher.show')}}" class="nav-link  {{ $elementActive == 'salarys' ? 'active' : '' }}">
             <i class="nav-icon fas fa-id-card-alt"></i>
@@ -96,6 +97,24 @@
               </p>
             </a>
           </li>  
+          @else
+          <li class="nav-item">
+            <a href="{{route('salary.teacher.show')}}" class="nav-link  {{ $elementActive == 'salarys' ? 'active' : '' }}">
+            <i class="nav-icon fas fa-id-card-alt"></i>
+              <p>
+                Salary
+              </p>
+            </a>
+          </li>  
+          <li class="nav-item">
+            <a href="{{route('show.calendar')}}" class="nav-link  {{ $elementActive == 'calendars' ? 'active' : '' }}">
+            <i class="nav-icon fas fa-id-card-alt"></i>
+              <p>
+               CALENDAR
+              </p>
+            </a>
+          </li>  
+          @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
