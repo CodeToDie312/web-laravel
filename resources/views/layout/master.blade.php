@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{asset('plugins/fullcalendar/main.css')}}">
   @csrf
 </head>
 <body class="hold-transition sidebar-mini">
@@ -60,11 +61,14 @@
 <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script src="{{asset('plugins/fullcalendar/main.js')}} " charset="utf-8"></script>
+<script src="{{asset('plugins/moment/moment.min.js')}}"></script>
+<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "searching": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
@@ -75,6 +79,35 @@
       "autoWidth": true,
       "responsive": true,
     });
+    //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+
+    /* initialize the calendar
+    -----------------------------------------------------------------*/
+    //Date for the calendar events (dummy data)
+    var date = new Date()
+    var d    = date.getDate(),
+        m    = date.getMonth(),
+        y    = date.getFullYear()
+
+    var Calendar = FullCalendar.Calendar;
+
+    var calendarEl = document.getElementById('calendar');
+
+
+    var calendar = new Calendar(calendarEl, {
+      headerToolbar: {
+        left  : 'prev,next today',
+        center: 'title',
+        right : 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      themeSystem: 'bootstrap',
+      //Random default events
+      editable  : true,
+      droppable : false, // this allows things to be dropped onto the calendar !!!
+    });
+
+    calendar.render();
+    // $('#calendar').fullCalendar()
   });
 </script>
 @stack('other-scripts')

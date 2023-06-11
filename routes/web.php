@@ -6,6 +6,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\Guest\LandingpageController;
 use App\Http\Controllers\NewStudentController;
 use App\Http\Middleware\CheckLoginMiddleware;
@@ -23,15 +25,6 @@ Route::group([
     Route::get('form', [LandingpageController::class, 'form'])->name('form');
     Route::get('search', [LandingpageController::class, 'search'])->name('search');
     Route::post('join_student/store', [LandingpageController::class, 'store'])->name('join.store');
-});
-
-// Route Teacher 
-Route::group([
-    'middleware' => 'teacher'
-], function(){
-    // Route::get('/calendar', [CalendarController::class, 'index'])->name('show.calendar');
-    // Route::post('/add_calendar', [CalendarController::class, 'add'])->name('add.calendar');
-    // Route::get('/salary', [TeacherSalaryController::class, 'index'])->name('salary.teacher.show');
 });
 
 // Route Admin Permission
@@ -86,6 +79,10 @@ Route::group([
     Route::get('new_student/index', [NewStudentController::class, 'index'])->name('new_student.list');
     Route::get('new_student/fetch/{id}', [NewStudentController::class, 'fetch'])->name('new_student.detail');
     Route::post('new_student/trigger', [NewStudentController::class, 'trigger'])->name('new_student.trigger');
+
+    Route::get('/calendar', [CalendarController::class, 'index'])->name('show.calendar');
+    Route::get('/salary', [SalaryController::class, 'index'])->name('salary.teacher.show');
+    Route::post('/salary', [SalaryController::class, 'search'])->name('salary.teacher.search');
 });
 Route::get('test', function() {
     return view('layout.user');

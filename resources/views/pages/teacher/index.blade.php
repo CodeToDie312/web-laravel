@@ -24,7 +24,7 @@
                 <th>Birthday</th>
                 <th>Address</th>
                 <th>Status</th>
-                <th>Salary</th>
+                <th>Case</th>
                 <th>Classroom ID</th>
                 <th>Course ID</th>
                 <th>Edit</th>
@@ -40,7 +40,7 @@
                 <td>{{$value->birthdate}}</td>
                 <td>{{$value->address}}</td>
                 <td>{{$value->status}}</td>
-                <td>{{$value->salary}}</td>
+                <td>{{$value->case}}</td>
                 <td>{{$value->classroom_id}}</td>
                 <td>{{$value->course_id}}</td>
                 <td>
