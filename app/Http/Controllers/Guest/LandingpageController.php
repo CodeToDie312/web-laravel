@@ -14,13 +14,20 @@ class LandingpageController extends Controller
     public function index()
     {
         $course = Course::where('id', '<', 5)->get()->toArray();
+        $teacher = Teacher::where('id', '<', 5)->get()->toArray();
         for($i = 0 ; $i <= count($course) ; $i++){
             $course1 = $course[0];
             $course2 = $course[1];
             $course3 = $course[2];
             $course4 = $course[3];
         }
-        return view('home', compact('course1', 'course2', 'course3', 'course4'));
+        for($i=0; $i <= count($teacher); $i++){
+            $teacher1 = $teacher[0];
+            $teacher2 = $teacher[1];
+            $teacher3 = $teacher[2];
+            $teacher4 = $teacher[3];
+        }
+        return view('home', compact('course1', 'course2', 'course3', 'course4', 'teacher1', 'teacher2', 'teacher3', 'teacher4'));
     }
 
     public function form()
@@ -38,6 +45,7 @@ class LandingpageController extends Controller
         $result['gender']  = $teacher['gender'] === 0 ? 'male': 'female';
         $result['address']  = $teacher['address'];
         $result['birthdate']  = $teacher['birthdate'];
+        $result['desciption'] = $teacher['desciption'];
         return view('teacherdetail', compact('result'));
     }
 

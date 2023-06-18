@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('email');
             $table->date('birthdate');
+            $table->string('desciption', 255);
             $table->string('address',225);
             $table->tinyInteger('status');
             $table->integer('case');

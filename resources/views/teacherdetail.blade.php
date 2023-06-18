@@ -99,6 +99,18 @@
           class="formbold-form-input formbold-mb-3"
         />
       </div>
+      <div class="formbold-mb-3">
+        <label for="desciption" class="formbold-form-label"> Desciption </label>
+
+        <input
+          type="text"
+          name="desciption"
+          disabled
+          id="desciption"
+          value="{{$result['desciption']}}"
+          class="formbold-form-input formbold-mb-3"
+        />
+      </div>
       <button class="formbold-btn"><a href="{{route('form')}}">Join Now</a></button>
     </form>
   </div>

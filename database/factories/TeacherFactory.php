@@ -26,6 +26,7 @@ class TeacherFactory extends Factory
             'email' => $this->faker->email(),
             'birthdate' => now(),
             'address' => $this->faker->address(),
+            'desciption' => $this->faker->text(255),
             'status' => '1',
             'case' => $this->faker->numberBetween(0, 10),
             'classroom_id' => $this->faker->randomElement($classroom_id),

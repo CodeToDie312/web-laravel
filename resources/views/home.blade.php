@@ -133,6 +133,74 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="footer_section layout_padding">
+		<div class="container">
+		<h1 class="best_taital">Top Teacher</h1>
+		</div>
+	</div>
+	<div class="marketing_section layout_padding">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="job_section">
+					    <h1 class="jobs_text">{{$teacher1['name']}}</h1>
+					    <p class="dummy_text">{{$teacher1['desciption']}}</p>
+					    <div class="apply_bt"><a href="{{route('form')}}">Apply now</a></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="image_1 padding_0"><img src="{{asset('front/images/img-1.png')}}"></div>
+				</div>
+			</div>
+		</div>
+	</div><div class="marketing_section layout_padding">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="job_section">
+					    <h1 class="jobs_text">{{$teacher2['name']}}</h1>
+					    <p class="dummy_text">{{$teacher2['desciption']}}</p>
+					    <div class="apply_bt"><a href="{{route('form')}}">Apply now</a></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="image_1 padding_0"><img src="{{asset('front/images/img-1.png')}}"></div>
+				</div>
+			</div>
+		</div>
+	</div><div class="marketing_section layout_padding">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="job_section">
+					    <h1 class="jobs_text">{{$teacher3['name']}}</h1>
+					    <p class="dummy_text">{{$teacher3['desciption']}}</p>
+					    <div class="apply_bt"><a href="{{route('form')}}">Apply now</a></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="image_1 padding_0"><img src="{{asset('front/images/img-1.png')}}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div><div class="marketing_section layout_padding">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="job_section">
+					    <h1 class="jobs_text">{{$teacher4['name']}}</h1>
+					    <p class="dummy_text">{{$teacher4['desciption']}}</p>
+					    <div class="apply_bt"><a href="{{route('form')}}">Apply now</a></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="image_1 padding_0"><img src="{{asset('front/images/img-1.png')}}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Government section end-->
 	<!-- footer section start-->
 	<div class="footer_section layout_padding">
